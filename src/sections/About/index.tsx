@@ -1,4 +1,22 @@
+import { FaJava, FaPython, FaReact } from "react-icons/fa";
+import {
+    SiTensorflow,
+    SiMysql,
+    SiFastapi,
+    SiOpencv,
+  }
+  from "react-icons/si";
 import profileImage from "../../assets/profile.jpg";
+
+const skills = [
+  { name: "Java", icon: <FaJava /> },
+  { name: "Python", icon: <FaPython /> },
+  { name: "React", icon: <FaReact /> },
+  { name: "TensorFlow", icon: <SiTensorflow /> },
+  { name: "MySQL", icon: <SiMysql /> },
+  { name: "FastAPI", icon: <SiFastapi /> },
+  { name: "OpenCV", icon: <SiOpencv /> },
+];
 
 export default function About() {
   return (
@@ -10,7 +28,7 @@ export default function About() {
 
         <div className="bg-slate-900/50 border border-purple-500/20 rounded-3xl p-10 backdrop-blur-sm">
 
-          <div className="grid md:grid-cols-2 gap-16 items-center">
+          <div className="grid md:grid-cols-2 gap-16 items-start">
 
             {/* Left Side Image */}
             <div className="flex justify-center">
@@ -134,24 +152,14 @@ export default function About() {
               </p>
 
               {/* Skill Badges */}
-              <div className="mt-10 flex flex-wrap gap-3">
-
-                {[
-                  "AI/ML",
-                  "Computer Vision",
-                  "React",
-                  "FastAPI",
-                  "Java",
-                  "Python",
-                  "LangChain",
-                  "ChromaDB",
-                  "SQL",
-                  "TensorFlow",
-                ].map((skill) => (
-                  <span
-                    key={skill}
-                    style={{ fontFamily: "'Times New Roman', serif" }}
+              <div className="mt-10 flex flex-wrap items-center gap-3">
+                {skills.map((skill) => (
+                  <div
+                    key={skill.name}
                     className="
+                      flex
+                      items-center
+                      gap-2
                       bg-purple-500/20
                       text-purple-300
                       px-4
@@ -165,10 +173,13 @@ export default function About() {
                       font-semibold
                     "
                   >
-                    {skill}
-                  </span>
-                ))}
+                    <span className="text-xl">
+                      {skill.icon}
+                    </span>
 
+                    <span>{skill.name}</span>
+                  </div>
+                ))}
               </div>
 
             </div>

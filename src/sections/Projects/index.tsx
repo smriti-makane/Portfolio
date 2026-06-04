@@ -1,14 +1,23 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { FaGithub } from "react-icons/fa";
+
+interface Project {
+  title: string;
+  description: string;
+  summary: string;
+  tech: string[];
+  github: string;
+  live: string;
+}
 
 export default function Projects() {
-  const [selectedProject, setSelectedProject] = useState<any>(null);  const projects = [
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+
+  const projects: Project[] = [
     {
       title: "ParkYourLot",
-
-      description:"Built an AI-powered parking management system using YOLO, OpenCV, Flask, and SQL that automates vehicle detection and parking allocation, achieving 90% detection accuracy and significantly improving parking efficiency through intelligent automation.",
-
+      description:
+        "Built an AI-powered parking management system using YOLO, OpenCV, Flask, and SQL that automates vehicle detection and parking allocation, achieving 90% detection accuracy and significantly improving parking efficiency through intelligent automation.",
       summary: `🚗 ParkYourLot – Smart Vehicle Detection & Parking Allocation System
       
       📌 Project Overview
@@ -64,14 +73,13 @@ export default function Projects() {
       • IoT Integration
      `,
       tech: ["YOLO", "OpenCV", "Flask", "SQL", "React"],
-
       github: "https://github.com/smriti-makane/ParkingAllocation",
-
       live: "https://parking-allocation-ten.vercel.app/",
     },
     {
       title: "Unique Minds Connect",
-      description:"Developed an AI-powered learning platform for neurodiverse students that integrates emotion recognition and adaptive learning, achieving 90% emotion detection accuracy while reducing manual intervention by 40% and improving personalized learning outcomes.",
+      description:
+        "Developed an AI-powered learning platform for neurodiverse students that integrates emotion recognition and adaptive learning, achieving 90% emotion detection accuracy while reducing manual intervention by 40% and improving personalized learning outcomes.",
       summary: `🧠 Unique Minds Connect
       
       📌 Project Overview
@@ -112,14 +120,14 @@ export default function Projects() {
       • Mobile Application
       • Advanced Emotion Analytics
       • AI-powered Student Performance Prediction`,
-        tech: ["TensorFlow", "DeepFace", "OpenCV", "Flask"],
-          github: "https://github.com/smriti-makane/Unique-Minds-Connects",
-            live: "",
-           
-    },  
+      tech: ["TensorFlow", "DeepFace", "OpenCV", "Flask"],
+      github: "https://github.com/smriti-makane/Unique-Minds-Connects",
+      live: "",
+    },
     {
       title: "CyberSense",
-      description:"Engineered an AI-based cybersecurity monitoring platform capable of detecting anomalies and analyzing threats in real time, achieving 92% threat detection efficiency and enhancing proactive security operations through intelligent automation.",
+      description:
+        "Engineered an AI-based cybersecurity monitoring platform capable of detecting anomalies and analyzing threats in real time, achieving 92% threat detection efficiency and enhancing proactive security operations through intelligent automation.",
       summary: `💡CyberSense
 
       📌 Project Overview
@@ -161,7 +169,8 @@ export default function Projects() {
       • Strengthened Proactive Cyber Defense
       
       🛠 Tech Stack
-      PythonFlask
+      Python
+      Flask
       JavaScript
       Artificial Intelligence
       Machine Learning
@@ -172,12 +181,38 @@ export default function Projects() {
       • Threat Prediction Models
       • Advanced Malware Detection
       • AI-powered Security Analytics`,
-      
       tech: ["Python", "Flask", "JavaScript", "AI"],
       github: "https://github.com/smriti-makane/CyberSense",
       live: "",
     },
   ];
+
+  const getIcon = (tech: string) => {
+    switch (tech) {
+      case "YOLO":
+        return "🎯";
+      case "OpenCV":
+        return "👁️";
+      case "Flask":
+        return "⚗️";
+      case "SQL":
+        return "🗄️";
+      case "React":
+        return "⚛️";
+      case "TensorFlow":
+        return "🧠";
+      case "DeepFace":
+        return "😊";
+      case "Python":
+        return "🐍";
+      case "JavaScript":
+        return "📜";
+      case "AI":
+        return "🤖";
+      default:
+        return "🚀";
+    }
+  };
 
   return (
     <section
@@ -185,26 +220,18 @@ export default function Projects() {
       className="min-h-screen bg-slate-950 text-white px-8 py-24"
     >
       <div className="max-w-7xl mx-auto">
-
         <h2
-        style={{ fontFamily: "Times New Roman, serif" }}
-        className="
-        text-7xl
-        font-bold
-        text-center
-        mb-16
-        text-purple-300
-        [text-shadow:3px_3px_0px_rgba(88,28,135,0.8),6px_6px_12px_rgba(0,0,0,0.5)]"
+          style={{ fontFamily: "Times New Roman, serif" }}
+          className="text-7xl font-bold text-center mb-16 text-purple-300 [text-shadow:3px_3px_0px_rgba(88,28,135,0.8),6px_6px_12px_rgba(0,0,0,0.5)]"
         >
           Projects
-          </h2>
+        </h2>
 
         <div className="grid md:grid-cols-3 gap-8">
-
           {projects.map((project) => (
             <motion.div
-            key={project.title}
-            style={{ fontFamily: "'Times New Roman', serif" }}
+              key={project.title}
+              style={{ fontFamily: "'Times New Roman', serif" }}
               whileHover={{
                 y: -10,
                 scale: 1.02,
@@ -213,92 +240,85 @@ export default function Projects() {
               className="bg-slate-900 border border-purple-500/20 rounded-3xl p-8 shadow-lg hover:border-purple-500 hover:shadow-[0_0_25px_rgba(168,85,247,0.3)] transition duration-300"
             >
               <h3
-              onClick={() => setSelectedProject(project)}
-              style={{ fontFamily: "'Times New Roman', serif" }}
-              className="text-3xl font-bold text-violet-400 cursor-pointer hover:text-fuchsia-400 transition"
+                onClick={() => setSelectedProject(project)}
+                style={{ fontFamily: "'Times New Roman', serif" }}
+                className="text-3xl font-bold text-violet-400 cursor-pointer hover:text-fuchsia-400 transition"
               >
                 {project.title}
               </h3>
 
               <p
-              style={{ fontFamily: "'Times New Roman', serif" }}
-              className="text-slate-300 mt-6 leading-8 text-xl"
+                style={{ fontFamily: "'Times New Roman', serif" }}
+                className="text-slate-300 mt-6 leading-8 text-xl"
               >
                 {project.description}
               </p>
 
-              {/* Tech Stack Heading */}
               <h4
-              style={{ fontFamily: "'Times New Roman', serif" }}
-              className="text-purple-400 font-semibold mt-8 mb-4 uppercase tracking-wider"
+                style={{ fontFamily: "'Times New Roman', serif" }}
+                className="text-purple-400 font-semibold mt-8 mb-4 uppercase tracking-wider"
               >
                 Tech Stack
               </h4>
 
-              <div className="flex flex-wrap gap-3">
+              <div className="flex flex-wrap items-center gap-3">
                 {project.tech.map((item) => (
-                  <span
+                  <div
                     key={`${project.title}-${item}`}
-                    style={{ fontFamily: "Times New Roman, serif" }}
-                    className="bg-purple-500/20 text-purple-300 px-4 py-2 rounded-full text-sm border border-purple-500/20 hover:bg-purple-500/30 transition"
+                    className="inline-flex items-center gap-2 bg-purple-500/20 text-purple-300 px-4 py-2 rounded-full text-sm border border-purple-500/20 hover:bg-purple-500/30 transition"
                   >
-                    {item}
-                  </span>
+                    <span className="text-lg">{getIcon(item)}</span>
+                    <span style={{ fontFamily: "'Times New Roman', serif" }}>{item}</span>
+                  </div>
                 ))}
-              </div>
-
-              {/* Links */}
-              <div className="flex gap-6 mt-8 items-center">
-                <a
-                  href={project.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-violet-400 hover:text-fuchsia-400 transition"
-                >
-                  <FaGithub />
-                  GitHub
-                </a>
-
-                {project.live && (
-                  <a
-                    href={project.live}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-fuchsia-400 hover:text-purple-300 transition"
-                  >
-                    Live Demo →
-                  </a>
-                )}
               </div>
             </motion.div>
           ))}
+        </div>
 
-                </div>
+        {selectedProject && (
+          <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50">
+            <div className="bg-slate-900 border border-purple-500 rounded-3xl p-8 w-[80%] max-w-5xl max-h-[85vh] overflow-y-auto mx-auto">
+              <h2 className="text-4xl font-bold text-violet-400 mb-6 text-center">
+                {selectedProject.title}
+              </h2>
 
-      </div>
+              <div className="text-slate-300 whitespace-pre-line leading-8">
+                {selectedProject.summary}
+              </div>
 
-      {selectedProject && (
-        <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50">
-          <div className="bg-slate-900 border border-purple-500 rounded-3xl p-8 w-[80%] max-w-5xl max-h-[85vh] overflow-y-auto mx-auto">
-            <h2 className="text-4xl font-bold text-violet-400 mb-6 text-center">
-              {selectedProject.title}
-            </h2>
-
-            <div className="text-slate-300 whitespace-pre-line leading-8">
-              {selectedProject.summary}
-            </div>
-
-            <div className="flex justify-center mt-8">
-              <button
-                onClick={() => setSelectedProject(null)}
-                className="mt-8 bg-gradient-to-r from-purple-600 to-fuchsia-600 px-6 py-3 rounded-xl"
-              >
-                Close
-              </button>
+              <div className="flex flex-wrap justify-center gap-4 mt-8">
+                {selectedProject.github && (
+                  <a
+                    href={selectedProject.github}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="bg-purple-600 px-6 py-3 rounded-xl text-white hover:bg-purple-500 transition"
+                  >
+                    GitHub
+                  </a>
+                )}
+                {selectedProject.live && (
+                  <a
+                    href={selectedProject.live}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="bg-fuchsia-600 px-6 py-3 rounded-xl text-white hover:bg-fuchsia-500 transition"
+                  >
+                    Live Demo
+                  </a>
+                )}
+                <button
+                  onClick={() => setSelectedProject(null)}
+                  className="bg-slate-800 px-6 py-3 rounded-xl text-white hover:bg-slate-700 transition"
+                >
+                  Close
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </section>
   );
 }
