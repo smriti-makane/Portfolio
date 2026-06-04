@@ -1,61 +1,27 @@
-import {
-  FaTrophy,
-  FaBook,
-  FaStar,
-  FaRocket,
-  FaCertificate,
-  FaShieldAlt,
-  FaPython,
-  FaBrain,
-} from "react-icons/fa";
+import { useState } from "react";
+import pythonCert from "../../assets/certificates/pythoncertificate.pdf";
+import cyberCert from "../../assets/certificates/cybersecurity.pdf";
+import hackathonCert from "../../assets/certificates/hackathon.pdf";
+import bookCert from "../../assets/certificates/book.pdf";
+import bestEmployeeCert from "../../assets/certificates/Bestemployee.pdf";
+
+import { FaTrophy, FaBook, FaStar, FaRocket, FaCertificate, FaShieldAlt, FaPython } from "react-icons/fa";
 
 export default function Achievements() {
+  const [selectedCertificate, setSelectedCertificate] = useState<string | null>(null);
+
   const achievements = [
-    {
-      icon: <FaTrophy />,
-      title: "Top 5 - Hack'24",
-      description: "Secured Top 5 position in Hack'24 at IIIT Delhi.",
-    },
-    {
-      icon: <FaBook />,
-      title: "Published Author",
-      description: "Research work published in Routledge Publication.",
-    },
-    {
-      icon: <FaStar />,
-      title: "Best Employee Award",
-      description: "Recognized for outstanding performance and dedication.",
-    },
-    {
-      icon: <FaRocket />,
-      title: "AI Project Excellence",
-      description: "Developed impactful AI-powered solutions.",
-    },
+    { icon: <FaTrophy />, title: "Top 5 - Hack'24", description: "Secured Top 5 position in Hack'24 at IIIT Delhi.", file: hackathonCert },
+    { icon: <FaStar />, title: "Best Employee Award", description: "Recognized for outstanding performance and dedication.", file: bestEmployeeCert },
+    { icon: <FaRocket />, title: "AI Project Excellence", description: "Developed impactful AI-powered solutions.", file: null },
   ];
 
   const certificates = [
-    {
-      icon: <FaShieldAlt />,
-      title: "Cisco Cybersecurity",
-      description: "Cisco Networking Academy Certification.",
-    },
-    {
-      icon: <FaPython />,
-      title: "Python Programming",
-      description: "Advanced Python Programming Certification.",
-    },
-    {
-      icon: <FaBrain />,
-      title: "Artificial Intelligence",
-      description: "AI & Machine Learning Certification.",
-    },
-    {
-      icon: <FaCertificate />,
-      title: "Machine Learning",
-      description: "ML Specialization & Practical Applications.",
-    },
+    { icon: <FaShieldAlt />, title: "Cisco Cybersecurity", description: "Cisco Networking Academy Certification.", file: cyberCert },
+    { icon: <FaPython />, title: "Python Programming", description: "Advanced Python Programming Certification.", file: pythonCert },
+    { icon: <FaCertificate />, title: "Hackathon Certificate", description: "Hackathon Participation & Achievement.", file: hackathonCert },
+    { icon: <FaBook />, title: "Published Author", description: "Research Publication Certificate.", file: bookCert },
   ];
-
   return (
     <section
       id="achievements"
@@ -107,8 +73,16 @@ export default function Achievements() {
 
                   <div>
                     <h4
-                      style={{ fontFamily: "Times New Roman, serif" }}
-                      className="text-2xl text-white font-semibold"
+                      onClick={() => item.file && setSelectedCertificate(item.file)}
+                      style={{ fontFamily: "'Times New Roman', serif" }}
+                      className="
+                        text-2xl
+                        text-white
+                        font-semibold
+                        cursor-pointer
+                        hover:text-violet-400
+                        transition
+                      "
                     >
                       {item.title}
                     </h4>
@@ -158,8 +132,9 @@ export default function Achievements() {
 
                   <div>
                     <h4
+                      onClick={() => item.file && setSelectedCertificate(item.file)}
                       style={{ fontFamily: "Times New Roman, serif" }}
-                      className="text-2xl text-white font-semibold"
+                      className="text-2xl text-white font-semibold cursor-pointer hover:text-violet-400 transition"
                     >
                       {item.title}
                     </h4>
@@ -183,6 +158,47 @@ export default function Achievements() {
 
         </div>
 
+        {selectedCertificate && (
+          <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50">
+
+            <div className="bg-slate-900 border border-purple-500 rounded-3xl p-6 w-[90%] max-w-5xl">
+
+              <h2
+                style={{ fontFamily: "'Times New Roman', serif" }}
+                className="text-3xl text-violet-400 font-bold text-center mb-6"
+              >
+                Certificate Preview
+              </h2>
+
+              <iframe
+                src={selectedCertificate as string}
+                title="Certificate Preview"
+                className="w-full h-[75vh] rounded-2xl bg-white"
+              />
+
+              <div className="flex justify-center mt-6">
+                <button
+                  onClick={() => setSelectedCertificate(null)}
+                  className="
+                    bg-gradient-to-r
+                    from-purple-600
+                    to-fuchsia-600
+                    px-6
+                    py-3
+                    rounded-xl
+                    font-semibold
+                    hover:scale-105
+                    transition
+                  "
+                >
+                  Close
+                </button>
+              </div>
+
+            </div>
+
+          </div>
+        )}
       </div>
     </section>
   );
