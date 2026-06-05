@@ -2,7 +2,7 @@ import { useState } from "react";
 import pythonCert from "../../assets/certificates/pythoncertificate.pdf";
 import cyberCert from "../../assets/certificates/cybersecurity.pdf";
 import hackathonCert from "../../assets/certificates/hackathon.pdf";
-import bookCert from "../../assets/certificates/book.pdf";
+
 import bestEmployeeCert from "../../assets/certificates/Bestemployee.pdf";
 
 import { FaTrophy, FaBook, FaStar, FaRocket, FaCertificate, FaShieldAlt, FaPython } from "react-icons/fa";
@@ -11,16 +11,35 @@ export default function Achievements() {
   const [selectedCertificate, setSelectedCertificate] = useState<string | null>(null);
 
   const achievements = [
-    { icon: <FaTrophy />, title: "Top 5 - Hack'24", description: "Secured Top 5 position in Hack'24 at IIIT Delhi.", file: hackathonCert },
-    { icon: <FaStar />, title: "Best Employee Award", description: "Recognized for outstanding performance and dedication.", file: bestEmployeeCert },
-    { icon: <FaRocket />, title: "AI Project Excellence", description: "Developed impactful AI-powered solutions.", file: null },
-  ];
+  {
+    icon: <FaTrophy />,
+    title: "Top 5 - Hack'24",
+    description: "Secured Top 5 position in Hack'24 at IIIT Delhi.",
+    file: hackathonCert,
+  },
+  {
+    icon: <FaBook />,
+    title: "Published Author",
+    description: "Research work published in Routledge Publication.",
+    link: "https://www.taylorfrancis.com/chapters/edit/10.1201/9781003494782-4/innovations-applications-future-prospects-agriculture-sector-emerging-technologies-smriti-singh-salman-khursheed-ahmad-km-ikra",
+  },
+  {
+    icon: <FaStar />,
+    title: "Best Employee Award",
+    description: "Recognized for outstanding performance and dedication.",
+    file: bestEmployeeCert,
+  },
+  {
+    icon: <FaRocket />,
+    title: "AI Project Excellence",
+    description: "Developed impactful AI-powered solutions.",
+  },
+];
 
   const certificates = [
     { icon: <FaShieldAlt />, title: "Cisco Cybersecurity", description: "Cisco Networking Academy Certification.", file: cyberCert },
     { icon: <FaPython />, title: "Python Programming", description: "Advanced Python Programming Certification.", file: pythonCert },
     { icon: <FaCertificate />, title: "Hackathon Certificate", description: "Hackathon Participation & Achievement.", file: hackathonCert },
-    { icon: <FaBook />, title: "Published Author", description: "Research Publication Certificate.", file: bookCert },
   ];
   return (
     <section
@@ -73,7 +92,13 @@ export default function Achievements() {
 
                   <div>
                     <h4
-                      onClick={() => item.file && setSelectedCertificate(item.file)}
+                      onClick={() => {
+                        if ("link" in item && item.link) {
+                          window.open(item.link, "_blank");
+                        } else if ("file" in item && item.file) {
+                          setSelectedCertificate(item.file);
+                        }
+                      }}
                       style={{ fontFamily: "'Times New Roman', serif" }}
                       className="
                         text-2xl
