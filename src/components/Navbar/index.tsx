@@ -1,74 +1,106 @@
-
 export default function Navbar() {
-  const navLinks = [
+  const leftLinks = [
     { name: "About", href: "#about" },
     { name: "Experience", href: "#experience" },
     { name: "Skills", href: "#skills" },
     { name: "Education", href: "#education" },
+  ];
+
+  const rightLinks = [
     { name: "Projects", href: "#projects" },
     { name: "Achievements", href: "#achievements" },
+    { name: "Certificates", href: "#certificates" },
     { name: "Contact", href: "#contact" },
   ];
-  
+
+  const linkStyle = `
+    relative
+    text-white
+    text-lg
+    font-semibold
+    transition-all
+    duration-500
+
+    hover:text-white
+    hover:-translate-y-1
+    hover:drop-shadow-[0_0_20px_rgba(255,255,255,0.9)]
+
+    after:content-['']
+    after:absolute
+    after:left-1/2
+    after:-bottom-1
+    after:h-[2px]
+    after:w-0
+    after:bg-gradient-to-r
+    after:from-white
+    after:via-[#E5E4E2]
+    after:to-white
+    after:transition-all
+    after:duration-500
+    after:-translate-x-1/2
+
+    hover:after:w-full
+  `;
 
   return (
     <>
-     
-
-      {/* Oval Navbar */}
-      <nav className="fixed top-6 left-[68%] -translate-x-1/2 z-50">
+      {/* LEFT NAVBAR */}
+      <nav className="fixed top-6 left-8 z-50">
         <div
-        className="
-        flex
-        items-center
-        gap-2
-        px-10
-        py-4
-        rounded-full
-        border
-        border-white/20
-        bg-black/50
-        backdrop-blur-xl
-        shadow-[0_0_30px_rgba(255,255,255,0.12)]"
+          className="
+            bg-black/60
+            backdrop-blur-xl
+            border
+            border-white/30
+            rounded-2xl
+            px-4
+            py-2
+            shadow-[0_0_35px_rgba(255,255,255,0.25)]
+          "
         >
-          {navLinks.map((link) => (
-            <a
-              key={link.name}
-              href={link.href}
-              style={{ fontFamily: "Times New Roman, serif" }}
-              className="
-                relative
-                px-4
-                py-2
-                rounded-full
-                text-white
-                text-base
-                font-medium
-                transition-all
-                duration-300
+          <div className="flex items-center gap-8 whitespace-nowrap">
+            {leftLinks.map((link) => (
+              <a
+                key={link.name}
+                href={link.href}
+                style={{ fontFamily: "Times New Roman, serif" }}
+                className={linkStyle}
+              >
+                {link.name}
+              </a>
+            ))}
+          </div>
+        </div>
+      </nav>
 
-                hover:text-white-300
-                hover:bg-white-500/10
-
-                after:content-['']
-                after:absolute
-                after:left-1/2
-                after:-bottom-1
-                after:h-[2px]
-                after:w-0
-                after:bg-white-400
-                after:transition-all
-                after:duration-300
-                after:-translate-x-1/2
-
-                hover:after:w-3/4
-              "
-            >
-              {link.name}
-            </a>
-          ))}
+      {/* RIGHT NAVBAR */}
+      <nav className="fixed top-6 right-8 z-50">
+        <div
+          className="
+            bg-black/60
+            backdrop-blur-xl
+            border
+            border-white/30
+            rounded-2xl
+            px-4
+            py-2
+            shadow-[0_0_35px_rgba(255,255,255,0.25)]
+          "
+        >
+          <div className="flex items-center gap-7 whitespace-nowrap">
+            {rightLinks.map((link) => (
+              <a
+                key={link.name}
+                href={link.href}
+                style={{ fontFamily: "Times New Roman, serif" }}
+                className={linkStyle}
+              >
+                {link.name}
+              </a>
+            ))}
+          </div>
         </div>
       </nav>
     </>
   );
-} 
+}
