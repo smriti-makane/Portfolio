@@ -1,3 +1,4 @@
+import SolarSystem from "./sections/SolarSystem";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import ProjectDetails from "./pages/ProjectDetails";
